@@ -1,9 +1,15 @@
 @use 'config/reset.scss';
 @use 'config/variaveis.scss';
+@use 'sass:math';
 
 @mixin elementoLi(){
     list-style: none;
 }
+
+@function pixelParaEm($alvoEmPixel, $contextoEmPixel: 16px){
+    @return math.div($alvoEmPixel, $contextoEmPixel)+em;
+}
+
 
 
 body {
@@ -61,17 +67,17 @@ section {
 
     .product-item{
         @include elementoLi();
-    }
 
-    .product-item img {
-        width: 100%;
-        border-radius: 16px;
+        img {
+            width: 100%;
+            border-radius: 16px;
+        }
     }
 
     .product-button {
         display: block;
-        background-color: #44bd32;
-        color: #fff;
+        background-color: variaveis.$corSecundaria;
+        color: variaveis.$corTextoBranco;
         text-align: center;
         padding: 8px 0;
         border-radius: 8px;
@@ -82,9 +88,35 @@ section {
 }
 
 
+.product-button:hover {
+    background-color: variaveis.$corButtonHover;
+}
 
-@media screen and (max-width: variaveis.$mobile){
-    .container{
+
+
+// @media screen and (max-width: variaveis.$mobile){
+//     .container{
+//         max-width: 80%;
+//     }
+// }
+
+@media screen and (max-width: variaveis.$tablet) {
+    .container {
         max-width: 80%;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 48.5%);
+        column-gap: 3%;
+    }
+}
+
+@media screen and (max-width: variaveis.$mobile) {
+    .products {
+        display: block;
+    }
+
+    .product-item  {
+        margin-bottom: 32px;
     }
 }
